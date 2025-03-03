@@ -1,35 +1,35 @@
-# Editor temp files
-*~
+# # Editor temp files
+# *~
 
-# macOS Finder attribute files
-.DS_Store
+# # macOS Finder attribute files
+# .DS_Store
 
-node_modules
+# node_modules
 
-# output of TypeScript transpilation
-/packages/*/dist
+# # output of TypeScript transpilation
+# /packages/*/dist
 
-# api-extractor temp files
-/packages/*/temp
+# # api-extractor temp files
+# /packages/*/temp
 
-/temp
-.env
-.eslintcache
+# /temp
+# .env
+# .eslintcache
 
-# Don't track NPM lockfile (we use Yarn)
-package-lock.json
+# # Don't track NPM lockfile (we use Yarn)
+# package-lock.json
 
-# Don't track hardhat mainnet fork cache
-cache
+# # Don't track hardhat mainnet fork cache
+# cache
 
-# ngrok config is individual to each dev
-ngrok.config.yml
+# # ngrok config is individual to each dev
+# ngrok.config.yml
 
-# Yarn
-.pnp.*
-/.yarn/*
-!/.yarn/patches
-!/.yarn/plugins
-!/.yarn/releases
-!/.yarn/sdks
-!/.yarn/versions
+# # Yarn
+# .pnp.*
+# /.yarn/*
+# !/.yarn/patches
+# !/.yarn/plugins
+# !/.yarn/releases
+# !/.yarn/sdks
+# !/.yarn/versions

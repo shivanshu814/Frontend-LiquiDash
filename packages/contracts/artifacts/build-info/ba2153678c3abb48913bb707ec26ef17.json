@@ -1,0 +1,742 @@
+{
+  "id": "ba2153678c3abb48913bb707ec26ef17",
+  "_format": "hh-sol-build-info-1",
+  "solcVersion": "0.6.11",
+  "solcLongVersion": "0.6.11+commit.5ef660b1",
+  "input": {
+    "language": "Solidity",
+    "sources": {
+      "contracts/Integrations/LUSDUsdToLUSDEth.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.6.11;\n\n\ninterface IPriceFeed {\n    function latestAnswer() external view returns (int256);\n}\n\n\ncontract LUSDUsdToLUSDEth is IPriceFeed {\n    IPriceFeed public constant LUSD_USD = IPriceFeed(0x3D7aE7E594f2f2091Ad8798313450130d0Aba3a0);\n    IPriceFeed public constant ETH_USD = IPriceFeed(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);\n\n    constructor() public {}\n\n    function latestAnswer() external view override returns (int256) {\n        return (LUSD_USD.latestAnswer() * 1 ether) / ETH_USD.latestAnswer();\n    }\n}\n"
+      }
+    },
+    "settings": {
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "output": {
+    "contracts": {
+      "contracts/Integrations/LUSDUsdToLUSDEth.sol": {
+        "IPriceFeed": {
+          "abi": [
+            {
+              "inputs": [],
+              "name": "latestAnswer",
+              "outputs": [
+                {
+                  "internalType": "int256",
+                  "name": "",
+                  "type": "int256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "deployedBytecode": {
+              "immutableReferences": {},
+              "linkReferences": {},
+              "object": "",
+              "opcodes": "",
+              "sourceMap": ""
+            },
+            "methodIdentifiers": {
+              "latestAnswer()": "50d25bcd"
+            }
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.6.11+commit.5ef660b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"latestAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Integrations/LUSDUsdToLUSDEth.sol\":\"IPriceFeed\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":100},\"remappings\":[]},\"sources\":{\"contracts/Integrations/LUSDUsdToLUSDEth.sol\":{\"keccak256\":\"0x43acc9a47187c316f8b70205e5654a58d1797caf5b482515055764d236f85c42\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fed8be4aac94c358cc7c9192d0d8d293b96c5cb71218490b28a1819af79f8c30\",\"dweb:/ipfs/QmPxg5wgdv4VJhmRD1cXqvQriuFWyFxrYCnea3pRaqpXFw\"]}},\"version\":1}"
+        },
+        "LUSDUsdToLUSDEth": {
+          "abi": [
+            {
+              "inputs": [],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ETH_USD",
+              "outputs": [
+                {
+                  "internalType": "contract IPriceFeed",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "LUSD_USD",
+              "outputs": [
+                {
+                  "internalType": "contract IPriceFeed",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "latestAnswer",
+              "outputs": [
+                {
+                  "internalType": "int256",
+                  "name": "",
+                  "type": "int256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "608060405234801561001057600080fd5b506101fb806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806350d25bcd146100465780636260f55b14610060578063a00d9b7314610084575b600080fd5b61004e61008c565b60408051918252519081900360200190f35b610068610195565b604080516001600160a01b039092168252519081900360200190f35b6100686101ad565b6000735f4ec3df9cbd43714fe2740f5e3616155c5b84196001600160a01b03166350d25bcd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156100db57600080fd5b505afa1580156100ef573d6000803e3d6000fd5b505050506040513d602081101561010557600080fd5b5051604080516350d25bcd60e01b81529051733d7ae7e594f2f2091ad8798313450130d0aba3a0916350d25bcd916004808301926020929190829003018186803b15801561015257600080fd5b505afa158015610166573d6000803e3d6000fd5b505050506040513d602081101561017c57600080fd5b5051670de0b6b3a7640000028161018f57fe5b05905090565b735f4ec3df9cbd43714fe2740f5e3616155c5b841981565b733d7ae7e594f2f2091ad8798313450130d0aba3a08156fea2646970667358221220ef996198431524f0c40f8a6c00cc56e8430d972c86eb78e8f9f9ec99319c93e964736f6c634300060b0033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH2 0x1FB DUP1 PUSH2 0x20 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x50D25BCD EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0x6260F55B EQ PUSH2 0x60 JUMPI DUP1 PUSH4 0xA00D9B73 EQ PUSH2 0x84 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4E PUSH2 0x8C JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x68 PUSH2 0x195 JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP3 AND DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x68 PUSH2 0x1AD JUMP JUMPDEST PUSH1 0x0 PUSH20 0x5F4EC3DF9CBD43714FE2740F5E3616155C5B8419 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH4 0x50D25BCD PUSH1 0x40 MLOAD DUP2 PUSH4 0xFFFFFFFF AND PUSH1 0xE0 SHL DUP2 MSTORE PUSH1 0x4 ADD PUSH1 0x20 PUSH1 0x40 MLOAD DUP1 DUP4 SUB DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0xDB JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0xEF JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x105 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH1 0x40 DUP1 MLOAD PUSH4 0x50D25BCD PUSH1 0xE0 SHL DUP2 MSTORE SWAP1 MLOAD PUSH20 0x3D7AE7E594F2F2091AD8798313450130D0ABA3A0 SWAP2 PUSH4 0x50D25BCD SWAP2 PUSH1 0x4 DUP1 DUP4 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0x152 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0x166 JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x17C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH8 0xDE0B6B3A7640000 MUL DUP2 PUSH2 0x18F JUMPI INVALID JUMPDEST SDIV SWAP1 POP SWAP1 JUMP JUMPDEST PUSH20 0x5F4EC3DF9CBD43714FE2740F5E3616155C5B8419 DUP2 JUMP JUMPDEST PUSH20 0x3D7AE7E594F2F2091AD8798313450130D0ABA3A0 DUP2 JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xEF SWAP10 PUSH2 0x9843 ISZERO 0x24 CREATE 0xC4 0xF DUP11 PUSH13 0xCC56E8430D972C86EB78E8F9 0xF9 0xEC SWAP10 BALANCE SWAP13 SWAP4 0xE9 PUSH5 0x736F6C6343 STOP MOD SIGNEXTEND STOP CALLER ",
+              "sourceMap": "146:421:0:-:0;;;388:23;;;;;;;;;;146:421;;;;;;"
+            },
+            "deployedBytecode": {
+              "immutableReferences": {},
+              "linkReferences": {},
+              "object": "608060405234801561001057600080fd5b50600436106100415760003560e01c806350d25bcd146100465780636260f55b14610060578063a00d9b7314610084575b600080fd5b61004e61008c565b60408051918252519081900360200190f35b610068610195565b604080516001600160a01b039092168252519081900360200190f35b6100686101ad565b6000735f4ec3df9cbd43714fe2740f5e3616155c5b84196001600160a01b03166350d25bcd6040518163ffffffff1660e01b815260040160206040518083038186803b1580156100db57600080fd5b505afa1580156100ef573d6000803e3d6000fd5b505050506040513d602081101561010557600080fd5b5051604080516350d25bcd60e01b81529051733d7ae7e594f2f2091ad8798313450130d0aba3a0916350d25bcd916004808301926020929190829003018186803b15801561015257600080fd5b505afa158015610166573d6000803e3d6000fd5b505050506040513d602081101561017c57600080fd5b5051670de0b6b3a7640000028161018f57fe5b05905090565b735f4ec3df9cbd43714fe2740f5e3616155c5b841981565b733d7ae7e594f2f2091ad8798313450130d0aba3a08156fea2646970667358221220ef996198431524f0c40f8a6c00cc56e8430d972c86eb78e8f9f9ec99319c93e964736f6c634300060b0033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x50D25BCD EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0x6260F55B EQ PUSH2 0x60 JUMPI DUP1 PUSH4 0xA00D9B73 EQ PUSH2 0x84 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4E PUSH2 0x8C JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD SWAP2 DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x68 PUSH2 0x195 JUMP JUMPDEST PUSH1 0x40 DUP1 MLOAD PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB SWAP1 SWAP3 AND DUP3 MSTORE MLOAD SWAP1 DUP2 SWAP1 SUB PUSH1 0x20 ADD SWAP1 RETURN JUMPDEST PUSH2 0x68 PUSH2 0x1AD JUMP JUMPDEST PUSH1 0x0 PUSH20 0x5F4EC3DF9CBD43714FE2740F5E3616155C5B8419 PUSH1 0x1 PUSH1 0x1 PUSH1 0xA0 SHL SUB AND PUSH4 0x50D25BCD PUSH1 0x40 MLOAD DUP2 PUSH4 0xFFFFFFFF AND PUSH1 0xE0 SHL DUP2 MSTORE PUSH1 0x4 ADD PUSH1 0x20 PUSH1 0x40 MLOAD DUP1 DUP4 SUB DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0xDB JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0xEF JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x105 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH1 0x40 DUP1 MLOAD PUSH4 0x50D25BCD PUSH1 0xE0 SHL DUP2 MSTORE SWAP1 MLOAD PUSH20 0x3D7AE7E594F2F2091AD8798313450130D0ABA3A0 SWAP2 PUSH4 0x50D25BCD SWAP2 PUSH1 0x4 DUP1 DUP4 ADD SWAP3 PUSH1 0x20 SWAP3 SWAP2 SWAP1 DUP3 SWAP1 SUB ADD DUP2 DUP7 DUP1 EXTCODESIZE ISZERO DUP1 ISZERO PUSH2 0x152 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP GAS STATICCALL ISZERO DUP1 ISZERO PUSH2 0x166 JUMPI RETURNDATASIZE PUSH1 0x0 DUP1 RETURNDATACOPY RETURNDATASIZE PUSH1 0x0 REVERT JUMPDEST POP POP POP POP PUSH1 0x40 MLOAD RETURNDATASIZE PUSH1 0x20 DUP2 LT ISZERO PUSH2 0x17C JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP MLOAD PUSH8 0xDE0B6B3A7640000 MUL DUP2 PUSH2 0x18F JUMPI INVALID JUMPDEST SDIV SWAP1 POP SWAP1 JUMP JUMPDEST PUSH20 0x5F4EC3DF9CBD43714FE2740F5E3616155C5B8419 DUP2 JUMP JUMPDEST PUSH20 0x3D7AE7E594F2F2091AD8798313450130D0ABA3A0 DUP2 JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xEF SWAP10 PUSH2 0x9843 ISZERO 0x24 CREATE 0xC4 0xF DUP11 PUSH13 0xCC56E8430D972C86EB78E8F9 0xF9 0xEC SWAP10 BALANCE SWAP13 SWAP4 0xE9 PUSH5 0x736F6C6343 STOP MOD SIGNEXTEND STOP CALLER ",
+              "sourceMap": "146:421:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;417:148;;;:::i;:::-;;;;;;;;;;;;;;;;290:91;;;:::i;:::-;;;;-1:-1:-1;;;;;290:91:0;;;;;;;;;;;;;;192:92;;;:::i;417:148::-;473:6;338:42;-1:-1:-1;;;;;536:20:0;;:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;536:22:0;499:23;;;-1:-1:-1;;;499:23:0;;;;241:42;;499:21;;:23;;;;;536:22;;499:23;;;;;;;241:42;499:23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;499:23:0;525:7;499:33;498:60;;;;;;491:67;;417:148;:::o;290:91::-;338:42;290:91;:::o;192:92::-;241:42;192:92;:::o"
+            },
+            "methodIdentifiers": {
+              "ETH_USD()": "6260f55b",
+              "LUSD_USD()": "a00d9b73",
+              "latestAnswer()": "50d25bcd"
+            }
+          },
+          "metadata": "{\"compiler\":{\"version\":\"0.6.11+commit.5ef660b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"ETH_USD\",\"outputs\":[{\"internalType\":\"contract IPriceFeed\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"LUSD_USD\",\"outputs\":[{\"internalType\":\"contract IPriceFeed\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestAnswer\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Integrations/LUSDUsdToLUSDEth.sol\":\"LUSDUsdToLUSDEth\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":100},\"remappings\":[]},\"sources\":{\"contracts/Integrations/LUSDUsdToLUSDEth.sol\":{\"keccak256\":\"0x43acc9a47187c316f8b70205e5654a58d1797caf5b482515055764d236f85c42\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fed8be4aac94c358cc7c9192d0d8d293b96c5cb71218490b28a1819af79f8c30\",\"dweb:/ipfs/QmPxg5wgdv4VJhmRD1cXqvQriuFWyFxrYCnea3pRaqpXFw\"]}},\"version\":1}"
+        }
+      }
+    },
+    "sources": {
+      "contracts/Integrations/LUSDUsdToLUSDEth.sol": {
+        "ast": {
+          "absolutePath": "contracts/Integrations/LUSDUsdToLUSDEth.sol",
+          "exportedSymbols": {
+            "IPriceFeed": [
+              7
+            ],
+            "LUSDUsdToLUSDEth": [
+              42
+            ]
+          },
+          "id": 43,
+          "license": "MIT",
+          "nodeType": "SourceUnit",
+          "nodes": [
+            {
+              "id": 1,
+              "literals": [
+                "solidity",
+                "^",
+                "0.6",
+                ".11"
+              ],
+              "nodeType": "PragmaDirective",
+              "src": "32:24:0"
+            },
+            {
+              "abstract": false,
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "interface",
+              "documentation": null,
+              "fullyImplemented": false,
+              "id": 7,
+              "linearizedBaseContracts": [
+                7
+              ],
+              "name": "IPriceFeed",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "body": null,
+                  "documentation": null,
+                  "functionSelector": "50d25bcd",
+                  "id": 6,
+                  "implemented": false,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "latestAnswer",
+                  "nodeType": "FunctionDefinition",
+                  "overrides": null,
+                  "parameters": {
+                    "id": 2,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "107:2:0"
+                  },
+                  "returnParameters": {
+                    "id": 5,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 4,
+                        "mutability": "mutable",
+                        "name": "",
+                        "nodeType": "VariableDeclaration",
+                        "overrides": null,
+                        "scope": 6,
+                        "src": "133:6:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        },
+                        "typeName": {
+                          "id": 3,
+                          "name": "int256",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "133:6:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "132:8:0"
+                  },
+                  "scope": 7,
+                  "src": "86:55:0",
+                  "stateMutability": "view",
+                  "virtual": false,
+                  "visibility": "external"
+                }
+              ],
+              "scope": 43,
+              "src": "59:84:0"
+            },
+            {
+              "abstract": false,
+              "baseContracts": [
+                {
+                  "arguments": null,
+                  "baseName": {
+                    "contractScope": null,
+                    "id": 8,
+                    "name": "IPriceFeed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 7,
+                    "src": "175:10:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                      "typeString": "contract IPriceFeed"
+                    }
+                  },
+                  "id": 9,
+                  "nodeType": "InheritanceSpecifier",
+                  "src": "175:10:0"
+                }
+              ],
+              "contractDependencies": [
+                7
+              ],
+              "contractKind": "contract",
+              "documentation": null,
+              "fullyImplemented": true,
+              "id": 42,
+              "linearizedBaseContracts": [
+                42,
+                7
+              ],
+              "name": "LUSDUsdToLUSDEth",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "constant": true,
+                  "functionSelector": "a00d9b73",
+                  "id": 14,
+                  "mutability": "constant",
+                  "name": "LUSD_USD",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 42,
+                  "src": "192:92:0",
+                  "stateVariable": true,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                    "typeString": "contract IPriceFeed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 10,
+                    "name": "IPriceFeed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 7,
+                    "src": "192:10:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                      "typeString": "contract IPriceFeed"
+                    }
+                  },
+                  "value": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "307833443761453745353934663266323039314164383739383331333435303133306430416261336130",
+                        "id": 12,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "241:42:0",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        "value": "0x3D7aE7E594f2f2091Ad8798313450130d0Aba3a0"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 11,
+                      "name": "IPriceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7,
+                      "src": "230:10:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_IPriceFeed_$7_$",
+                        "typeString": "type(contract IPriceFeed)"
+                      }
+                    },
+                    "id": 13,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "230:54:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                      "typeString": "contract IPriceFeed"
+                    }
+                  },
+                  "visibility": "public"
+                },
+                {
+                  "constant": true,
+                  "functionSelector": "6260f55b",
+                  "id": 19,
+                  "mutability": "constant",
+                  "name": "ETH_USD",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 42,
+                  "src": "290:91:0",
+                  "stateVariable": true,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                    "typeString": "contract IPriceFeed"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 15,
+                    "name": "IPriceFeed",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 7,
+                    "src": "290:10:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                      "typeString": "contract IPriceFeed"
+                    }
+                  },
+                  "value": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "307835663465433344663963626434333731344645323734306635453336313631353563356238343139",
+                        "id": 17,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "338:42:0",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        "value": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 16,
+                      "name": "IPriceFeed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7,
+                      "src": "327:10:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_IPriceFeed_$7_$",
+                        "typeString": "type(contract IPriceFeed)"
+                      }
+                    },
+                    "id": 18,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "327:54:0",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                      "typeString": "contract IPriceFeed"
+                    }
+                  },
+                  "visibility": "public"
+                },
+                {
+                  "body": {
+                    "id": 22,
+                    "nodeType": "Block",
+                    "src": "409:2:0",
+                    "statements": []
+                  },
+                  "documentation": null,
+                  "id": 23,
+                  "implemented": true,
+                  "kind": "constructor",
+                  "modifiers": [],
+                  "name": "",
+                  "nodeType": "FunctionDefinition",
+                  "overrides": null,
+                  "parameters": {
+                    "id": 20,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "399:2:0"
+                  },
+                  "returnParameters": {
+                    "id": 21,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "409:0:0"
+                  },
+                  "scope": 42,
+                  "src": "388:23:0",
+                  "stateMutability": "nonpayable",
+                  "virtual": false,
+                  "visibility": "public"
+                },
+                {
+                  "baseFunctions": [
+                    6
+                  ],
+                  "body": {
+                    "id": 40,
+                    "nodeType": "Block",
+                    "src": "481:84:0",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          },
+                          "id": 38,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "argumentTypes": null,
+                            "components": [
+                              {
+                                "argumentTypes": null,
+                                "commonType": {
+                                  "typeIdentifier": "t_int256",
+                                  "typeString": "int256"
+                                },
+                                "id": 33,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftExpression": {
+                                  "argumentTypes": null,
+                                  "arguments": [],
+                                  "expression": {
+                                    "argumentTypes": [],
+                                    "expression": {
+                                      "argumentTypes": null,
+                                      "id": 29,
+                                      "name": "LUSD_USD",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 14,
+                                      "src": "499:8:0",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                                        "typeString": "contract IPriceFeed"
+                                      }
+                                    },
+                                    "id": 30,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "memberName": "latestAnswer",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": 6,
+                                    "src": "499:21:0",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_function_external_view$__$returns$_t_int256_$",
+                                      "typeString": "function () view external returns (int256)"
+                                    }
+                                  },
+                                  "id": 31,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "kind": "functionCall",
+                                  "lValueRequested": false,
+                                  "names": [],
+                                  "nodeType": "FunctionCall",
+                                  "src": "499:23:0",
+                                  "tryCall": false,
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_int256",
+                                    "typeString": "int256"
+                                  }
+                                },
+                                "nodeType": "BinaryOperation",
+                                "operator": "*",
+                                "rightExpression": {
+                                  "argumentTypes": null,
+                                  "hexValue": "31",
+                                  "id": 32,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "kind": "number",
+                                  "lValueRequested": false,
+                                  "nodeType": "Literal",
+                                  "src": "525:7:0",
+                                  "subdenomination": "ether",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_rational_1000000000000000000_by_1",
+                                    "typeString": "int_const 1000000000000000000"
+                                  },
+                                  "value": "1"
+                                },
+                                "src": "499:33:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_int256",
+                                  "typeString": "int256"
+                                }
+                              }
+                            ],
+                            "id": 34,
+                            "isConstant": false,
+                            "isInlineArray": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "TupleExpression",
+                            "src": "498:35:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_int256",
+                              "typeString": "int256"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "/",
+                          "rightExpression": {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 35,
+                                "name": "ETH_USD",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 19,
+                                "src": "536:7:0",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IPriceFeed_$7",
+                                  "typeString": "contract IPriceFeed"
+                                }
+                              },
+                              "id": 36,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "latestAnswer",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 6,
+                              "src": "536:20:0",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_int256_$",
+                                "typeString": "function () view external returns (int256)"
+                              }
+                            },
+                            "id": 37,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "536:22:0",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_int256",
+                              "typeString": "int256"
+                            }
+                          },
+                          "src": "498:60:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "functionReturnParameters": 28,
+                        "id": 39,
+                        "nodeType": "Return",
+                        "src": "491:67:0"
+                      }
+                    ]
+                  },
+                  "documentation": null,
+                  "functionSelector": "50d25bcd",
+                  "id": 41,
+                  "implemented": true,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "latestAnswer",
+                  "nodeType": "FunctionDefinition",
+                  "overrides": {
+                    "id": 25,
+                    "nodeType": "OverrideSpecifier",
+                    "overrides": [],
+                    "src": "455:8:0"
+                  },
+                  "parameters": {
+                    "id": 24,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "438:2:0"
+                  },
+                  "returnParameters": {
+                    "id": 28,
+                    "nodeType": "ParameterList",
+                    "parameters": [
+                      {
+                        "constant": false,
+                        "id": 27,
+                        "mutability": "mutable",
+                        "name": "",
+                        "nodeType": "VariableDeclaration",
+                        "overrides": null,
+                        "scope": 41,
+                        "src": "473:6:0",
+                        "stateVariable": false,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        },
+                        "typeName": {
+                          "id": 26,
+                          "name": "int256",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "473:6:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "value": null,
+                        "visibility": "internal"
+                      }
+                    ],
+                    "src": "472:8:0"
+                  },
+                  "scope": 42,
+                  "src": "417:148:0",
+                  "stateMutability": "view",
+                  "virtual": false,
+                  "visibility": "external"
+                }
+              ],
+              "scope": 43,
+              "src": "146:421:0"
+            }
+          ],
+          "src": "32:536:0"
+        },
+        "id": 0
+      }
+    }
+  }
+}

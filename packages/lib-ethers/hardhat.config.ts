@@ -53,7 +53,7 @@ const generateRandomAccounts = (numberOfAccounts: number) => {
 const deployerAccount = process.env.DEPLOYER_PRIVATE_KEY || Wallet.createRandom().privateKey;
 const devChainRichAccount = "0x4d5db4107d237df6a3d58ee5f70ae63d73d7658d4026f2eefd2f204c81682cb7";
 
-const infuraApiKey = "ad9cef41c9c844a7b54d10be24d416e5";
+const infuraApiKey = "a283127b4f7d41e1b011a7d13e8ca53a";
 
 const infuraNetwork = (name: string): { [name: string]: NetworkUserConfig } => ({
   [name]: {
@@ -271,6 +271,13 @@ task("deploy", "Deploys the contracts to the network")
       console.log();
     }
   );
+
+task("balance", "Prints an account's ETH balance")
+  .addParam("account", "The account's address")
+  .setAction(async (taskArgs, hre) => {
+    const balance = await hre.ethers.provider.getBalance(taskArgs.account);
+    console.log(`${taskArgs.account} balance:`, hre.ethers.utils.formatEther(balance), "ETH");
+  });
 
 type StorageSlotParams = {
   contractAddress: string;

@@ -1,4 +1,4 @@
-node_modules
-/build
-/generated
-/subgraph.yaml
+# node_modules
+# /build
+# /generated
+# /subgraph.yaml
