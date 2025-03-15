@@ -7,16 +7,14 @@ type InfiniteEstimateProps = React.PropsWithChildren<{
 }>;
 
 export const InfiniteEstimate: React.FC<InfiniteEstimateProps> = ({ estimate, children }) => {
-  if (estimate.toString() !== Decimal.INFINITY.toString()) return <>{children ?? estimate}</>;
+  if (estimate.toString() !== Decimal.INFINITY.toString()) {
+    return <>{children ?? estimate.toString()}</>;
+  }
 
   return (
     <>
       {Decimal.INFINITY.toString()}
-      <InfoIcon
-        size="xs"
-        tooltip={l.INFINITE_ESTIMATION.description}
-        link={l.INFINITE_ESTIMATION.link}
-      />
+      <InfoIcon size="xs" tooltip={l.INFINITE_ESTIMATION.description} />
       &nbsp;
     </>
   );
