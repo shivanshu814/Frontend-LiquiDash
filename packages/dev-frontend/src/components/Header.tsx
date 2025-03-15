@@ -15,7 +15,7 @@ const select = ({ frontend }: LiquityStoreState) => ({
   frontend
 });
 
-export const Header: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const Header: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const {
     config: { frontendTag }
   } = useLiquity();

@@ -28,6 +28,7 @@ import {
   faHandPaper,
   faHeartbeat,
   faBars,
+  faLongArrowAltRight,
   faArrowDown
 } from "@fortawesome/free-solid-svg-icons";
 import { faClipboard, faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
@@ -63,6 +64,7 @@ library.add(
   faHeartbeat,
   faBars,
   faQuestionCircle,
+  faLongArrowAltRight,
   faArrowDown
 );
 

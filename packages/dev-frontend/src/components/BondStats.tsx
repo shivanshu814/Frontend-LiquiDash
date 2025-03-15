@@ -38,7 +38,7 @@ export const BondStats: React.FC<BondStatsProps> = () => {
         bLUSD
       </Heading>
       <Statistic lexicon={l.BLUSD_MARKET_PRICE}>
-        <Metric value={protocolInfo.marketPrice.prettify(3)} unit="LUSD" />
+        <Metric value={protocolInfo.marketPrice.prettify(2)} unit="LUSD" />
       </Statistic>
       <Statistic lexicon={l.BLUSD_FAIR_PRICE}>
         <Metric
@@ -53,10 +53,7 @@ export const BondStats: React.FC<BondStatsProps> = () => {
         />
       </Statistic>
       <Statistic lexicon={l.BLUSD_FLOOR_PRICE}>
-        <Metric value={protocolInfo.floorPriceWithoutPendingHarvests.prettify(4)} unit="LUSD" />
-      </Statistic>
-      <Statistic lexicon={l.BLUSD_WIND_DOWN_PRICE}>
-        <Metric value={protocolInfo.windDownPrice.prettify(4)} unit="LUSD" />
+        <Metric value={protocolInfo.floorPrice.prettify(4)} unit="LUSD" />
       </Statistic>
       <Statistic lexicon={l.BLUSD_APR}>
         <Metric

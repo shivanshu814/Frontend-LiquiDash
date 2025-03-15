@@ -83,7 +83,12 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
   const kickbackRatePct = frontendTag === AddressZero ? "100" : kickbackRate?.mul(100).prettify();
 
   return (
-    <Card {...{ variant }}>
+    <Card
+      variant={variant}
+      sx={{
+        borderRadius: "8px"
+      }}
+    >
       {showBalances && <Balances />}
 
       <Heading>Liquity statistics</Heading>
@@ -121,9 +126,9 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
       {kickbackRatePct && <Statistic lexicon={l.KICKBACK_RATE}>{kickbackRatePct}%</Statistic>}
 
       <Box sx={{ mt: 3, opacity: 0.66 }}>
-        <Box sx={{ fontSize: 0 }}>
+        {/* <Box sx={{ fontSize: 0 }}>
           Contracts version: <GitHubCommit>{contractsVersion}</GitHubCommit>
-        </Box>
+        </Box> */}
         <Box sx={{ fontSize: 0 }}>Deployed: {deploymentDate.toLocaleString()}</Box>
         <Box sx={{ fontSize: 0 }}>
           Frontend version:{" "}

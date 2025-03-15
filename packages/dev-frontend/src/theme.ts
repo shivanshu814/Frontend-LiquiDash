@@ -2,31 +2,119 @@ import { Theme, ThemeUIStyleObject } from "theme-ui";
 
 const baseColors = {
   blue: "#1542cd",
+  darkBlue: "#2a3145",
   purple: "#745ddf",
   cyan: "#2eb6ea",
+  lightCian: "#e6f6ff",
+  pinkCian: "#d4d9fc",
   green: "#28c081",
   yellow: "#fd9d28",
   red: "#dc2c10",
+  lightLightRed: "#ff755f0d",
   lightRed: "#ff755f"
+};
+
+const darkColors = {
+  blue: "#5762d5",
+  darkBlue: "#a3b763",
+  purple: "#40c4a1",
+  cyan: "#33e1d3",
+  lightCian: "#092b2b",
+  pinkCian: "#1a5050",
+  green: "#2fc98a",
+  yellow: "#ffb870",
+  red: "#ff5a4a",
+  lightLightRed: "#6d2822",
+  lightRed: "#ff7a6e"
 };
 
 const colors = {
   primary: baseColors.blue,
   secondary: baseColors.purple,
   accent: baseColors.cyan,
+  lightAccent: baseColors.lightCian,
+  pinkAccent: baseColors.pinkCian,
 
   success: baseColors.green,
   warning: baseColors.yellow,
   danger: baseColors.red,
+  lightDanger: baseColors.lightLightRed,
   dangerHover: baseColors.lightRed,
   info: baseColors.blue,
   invalid: "pink",
 
-  text: "#293147",
+  text: baseColors.darkBlue,
+  buttonText: "white",
   background: "white",
   muted: "#eaebed",
-  highlight: "#efeffe"
+  infoBorder: "#c7cede",
+  infoBorderLight: "#c7cedeb3",
+  darkModeMain: baseColors.darkBlue,
+  darkModeSecondary: "white",
+
+  modes: {
+    dark: {
+      primary: darkColors.blue,
+      secondary: darkColors.purple,
+      accent: darkColors.cyan,
+      lightAccent: darkColors.lightCian,
+      pinkAccent: darkColors.pinkCian,
+
+      success: darkColors.green,
+      warning: darkColors.yellow,
+      danger: darkColors.red,
+      lightDanger: darkColors.lightLightRed,
+      dangerHover: darkColors.lightRed,
+      info: darkColors.blue,
+      invalid: "#4d2d40",
+
+      text: "#aab8bf",
+      buttonText: "black",
+      background: "black",
+      muted: "#111213",
+      infoBorder: "#144848",
+      infoBorderLight: "#144848b3",
+      darkModeMain: darkColors.darkBlue,
+      darkModeSecondary: "#aab8bf"
+    }
+  }
 };
+
+const animations = {
+  fadeIn: {
+    animation: "fadeIn 0.3s ease-in-out forwards"
+  },
+  fadeOut: {
+    animation: "fadeOut 0.3s ease-in-out forwards"
+  },
+  slideUp: {
+    animation: "slideUp 0.3s ease-in-out forwards"
+  },
+  slideDown: {
+    animation: "slideDown 0.3s ease-in-out forwards"
+  },
+  scaleIn: {
+    animation: "scaleIn 0.3s ease-in-out forwards"
+  }
+};
+
+const keyframes = `
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; } to { opacity: 0; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; }
+  }
+`;
 
 const buttonBase: ThemeUIStyleObject = {
   display: "flex",
@@ -37,18 +125,14 @@ const buttonBase: ThemeUIStyleObject = {
 };
 
 const button: ThemeUIStyleObject = {
-  ...buttonBase,
-
   px: "32px",
   py: "12px",
-
-  color: "white",
+  color: "var(--theme-ui-colors-buttonText)",
   border: 1,
-
   fontWeight: "bold",
-
-  ":disabled": {
-    opacity: 0.5
+  transition: "all 0.2s ease-in-out",
+  ":hover": {
+    transform: "scale(1.05)"
   }
 };
 
@@ -97,7 +181,7 @@ const infoCard: ThemeUIStyleObject = {
   padding: 3,
 
   borderColor: "rgba(122,199,240,0.4)",
-  background: "linear-gradient(200deg, #d4d9fc, #cae9f9)",
+  background: "linear-gradient(145deg, #0F0C29 0%, #302B63 100%)",
 
   h2: {
     mb: 2,
@@ -134,15 +218,37 @@ const overlay: ThemeUIStyleObject = {
 
 const modalOverlay: ThemeUIStyleObject = {
   position: "fixed",
-
   left: 0,
   top: 0,
   width: "100vw",
-  height: "100vh"
+  height: "100vh",
+  bg: "rgba(0, 0, 0, 0.8)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  ...animations.fadeIn
 };
 
 const headerGradient: ThemeUIStyleObject = {
-  background: `linear-gradient(90deg, ${colors.background}, ${colors.muted})`
+  background: `linear-gradient(90deg, var(--theme-ui-colors-background), var(--theme-ui-colors-muted))`
+};
+
+const tooltip: ThemeUIStyleObject = {
+  padding: 2,
+  border: 1,
+  borderColor: "muted",
+  borderRadius: "4px",
+  bg: "background",
+  boxShadow: 2,
+  fontSize: 1,
+  color: "text",
+  fontWeight: "body",
+  zIndex: 1,
+  transition: "opacity 0.2s ease-in-out",
+  opacity: 0,
+  ":hover": {
+    opacity: 1
+  }
 };
 
 const theme: Theme = {
@@ -180,6 +286,7 @@ const theme: Theme = {
     heading: 1.25
   },
 
+  initialColorModeName: "light",
   colors,
 
   borders: [0, "1px solid", "2px solid"],
@@ -298,15 +405,18 @@ const theme: Theme = {
     },
 
     tooltip: {
-      fontWeight: "body",
-      marginY: 1,
+      padding: 2,
 
-      a: {
-        color: "accent",
-        ":hover": {
-          opacity: 0.8
-        }
-      }
+      border: 1,
+      borderColor: "muted",
+      borderRadius: "4px",
+      bg: "background",
+      boxShadow: 2,
+
+      fontSize: 1,
+      color: "text",
+      fontWeight: "body",
+      zIndex: 1
     }
   },
 
@@ -347,6 +457,7 @@ const theme: Theme = {
       alignItems: "stretch",
 
       position: ["fixed", "relative"],
+      width: "100vw",
       top: 0,
       zIndex: 1,
 
@@ -405,7 +516,7 @@ const theme: Theme = {
     disabledOverlay: {
       ...overlay,
 
-      bg: "rgba(255, 255, 255, 0.5)"
+      bg: "muted"
     },
 
     modalOverlay: {
@@ -420,7 +531,8 @@ const theme: Theme = {
 
     modal: {
       padding: 3,
-      width: ["100%", "40em"]
+      width: ["100%", "40em"],
+      bg: "muted"
     },
 
     infoOverlay: {
@@ -428,7 +540,7 @@ const theme: Theme = {
 
       display: ["block", "none"],
 
-      bg: "rgba(255, 255, 255, 0.8)"
+      bg: "background"
     },
 
     infoMessage: {
@@ -459,6 +571,10 @@ const theme: Theme = {
       color: "slate",
       fontSize: 1,
       fontWeight: "body"
+    },
+    layout: {
+      modalOverlay,
+      tooltip
     }
   },
 
@@ -471,13 +587,14 @@ const theme: Theme = {
       height: "100%",
 
       "#root": {
-        height: "100%"
+        height: "100%",
+        "@global": { keyframes }
       }
     },
 
     a: {
       color: "primary",
-      ":hover": { color: "accent" },
+      ":hover": { color: "accent", transition: "color 0.2s ease-in-out" },
       textDecoration: "none",
       fontWeight: "bold"
     },

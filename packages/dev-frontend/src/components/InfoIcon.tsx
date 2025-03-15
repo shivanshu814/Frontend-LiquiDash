@@ -1,24 +1,26 @@
 import React from "react";
+import Tippy, { TippyProps } from "@tippyjs/react";
 import { Icon } from "./Icon";
 import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import { Tooltip } from "./Tooltip";
-import type { TooltipProps } from "./Tooltip";
 
-export type InfoIconProps = Pick<TooltipProps, "placement" | "link"> &
-  Pick<FontAwesomeIconProps, "size"> & {
+export type InfoIconProps = Pick<TippyProps, "placement"> &
+  Pick<FontAwesomeIconProps, "size"> &
+  Partial<Pick<TippyProps, "maxWidth">> & {
     tooltip: React.ReactNode;
   };
 
 export const InfoIcon: React.FC<InfoIconProps> = ({
-  link,
   placement = "right",
   tooltip,
-  size = "1x"
+  size = "1x",
+  maxWidth = "562px"
 }) => {
   return (
-    <Tooltip message={tooltip} placement={placement} link={link}>
-      &nbsp;
-      <Icon name="question-circle" size={size} />
-    </Tooltip>
+    <Tippy interactive={true} placement={placement} content={tooltip} maxWidth={maxWidth}>
+      <span>
+        &nbsp;
+        <Icon name="question-circle" size={size} />
+      </span>
+    </Tippy>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box, Text } from "theme-ui";
+import { Flex, Box, Text, Card } from "theme-ui";
 import type { ThemeUIStyleObject } from "theme-ui";
 import { InfoIcon } from "./InfoIcon";
 import { Placeholder } from "./Placeholder";
@@ -76,17 +76,15 @@ type EventProps = EventType & {
   isPast: boolean;
 };
 
-type LabelProps = React.PropsWithChildren<{
+type LabelProps = {
   subLabel?: React.ReactNode;
   description?: React.ReactNode;
   style?: ThemeUIStyleObject;
-}>;
+};
 
-type SubLabelProps = React.PropsWithChildren<{
-  style?: ThemeUIStyleObject;
-}>;
+type SubLabelProps = { style?: ThemeUIStyleObject };
 
-export const SubLabel: React.FC<SubLabelProps> = ({ style, children }) => (
+export const SubLabel: React.FC<React.PropsWithChildren<SubLabelProps>> = ({ style, children }) => (
   <Flex
     sx={{
       fontWeight: 200,
@@ -101,7 +99,11 @@ export const SubLabel: React.FC<SubLabelProps> = ({ style, children }) => (
   </Flex>
 );
 
-export const Label: React.FC<LabelProps> = ({ children, description, style }) => {
+export const Label: React.FC<React.PropsWithChildren<LabelProps>> = ({
+  children,
+  description,
+  style
+}) => {
   return (
     <Flex
       sx={{
@@ -114,7 +116,16 @@ export const Label: React.FC<LabelProps> = ({ children, description, style }) =>
     >
       {children}
       &nbsp;
-      {description ? <InfoIcon size="xs" tooltip={description} /> : null}
+      {description ? (
+        <InfoIcon
+          size="xs"
+          tooltip={
+            <Card variant="tooltip" sx={{ width: "200px" }}>
+              {description}
+            </Card>
+          }
+        />
+      ) : null}
     </Flex>
   );
 };
@@ -135,6 +146,7 @@ const LoadingEvent: React.FC<{ label: React.ReactNode }> = ({ label }) => {
     </Flex>
   );
 };
+
 const Event: React.FC<EventProps> = ({
   isFirst,
   isLast,
