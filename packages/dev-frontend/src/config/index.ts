@@ -1,6 +1,4 @@
-import { AddressZero } from "@ethersproject/constants";
-import { isAddress, getAddress } from "@ethersproject/address";
-
+// Define the config type
 export type LiquityFrontendConfig = {
   frontendTag: string;
   infuraApiKey?: string;
@@ -9,91 +7,21 @@ export type LiquityFrontendConfig = {
   walletConnectProjectId: string;
 };
 
-const defaultConfig: LiquityFrontendConfig = {
-  frontendTag: AddressZero,
-  walletConnectProjectId: "b16efb4fd41473c0f45dbad8efa15a00"
+// ✅ Hardcoded config object
+const hardcodedConfig: LiquityFrontendConfig = {
+  frontendTag: "0x9AbDe3E91a0eF641D6FFAe82223F108902c1ffdA", // Replace with your frontend tag
+  infuraApiKey: "d05461c2925243cbb985977850e31435", // Replace with your Infura API key
+  alchemyApiKey: "", // Optional: add Alchemy API key if needed
+  testnetOnly: false, // Set to true if applicable
+  walletConnectProjectId: "b16efb4fd41473c0f45dbad8efa15a00" // Your WalletConnect project ID
 };
 
-function hasKey<K extends string>(o: object, k: K): o is Record<K, unknown> {
-  return k in o;
-}
-
-const parseConfig = (json: unknown): LiquityFrontendConfig => {
-  const config = { ...defaultConfig };
-
-  if (typeof json === "object" && json !== null) {
-    if (hasKey(json, "frontendTag") && json.frontendTag !== "") {
-      const { frontendTag } = json;
-
-      if (typeof frontendTag === "string" && isAddress(frontendTag)) {
-        config.frontendTag = getAddress(frontendTag);
-      } else {
-        console.error("Malformed frontendTag:");
-        console.log(frontendTag);
-      }
-    }
-
-    if (hasKey(json, "infuraApiKey") && json.infuraApiKey !== "") {
-      const { infuraApiKey } = json;
-
-      if (typeof infuraApiKey === "string") {
-        config.infuraApiKey = infuraApiKey;
-      } else {
-        console.error("Malformed infuraApiKey:");
-        console.log(infuraApiKey);
-      }
-    }
-
-    if (hasKey(json, "alchemyApiKey") && json.alchemyApiKey !== "") {
-      const { alchemyApiKey } = json;
-
-      if (typeof alchemyApiKey === "string") {
-        config.alchemyApiKey = alchemyApiKey;
-      } else {
-        console.error("Malformed alchemyApiKey:");
-        console.log(alchemyApiKey);
-      }
-    }
-
-    if (hasKey(json, "testnetOnly")) {
-      const { testnetOnly } = json;
-
-      if (typeof testnetOnly === "boolean") {
-        config.testnetOnly = testnetOnly;
-      } else {
-        console.error("Malformed testnetOnly:");
-        console.log(testnetOnly);
-      }
-    }
-  } else {
-    console.error("Malformed config:");
-    console.log(json);
-  }
-
-  return config;
+// ✅ Simple getConfig function returns the hardcoded config
+export const getConfig = async (): Promise<LiquityFrontendConfig> => {
+  return hardcodedConfig;
 };
 
-let configPromise: Promise<LiquityFrontendConfig> | undefined = undefined;
-
-const fetchConfig = async () => {
-  try {
-    const response = await fetch("config.json");
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch config.json (status ${response.status})`);
-    }
-
-    return parseConfig(await response.json());
-  } catch (err) {
-    console.error(err);
-    return { ...defaultConfig };
-  }
-};
-
-export const getConfig = (): Promise<LiquityFrontendConfig> => {
-  if (!configPromise) {
-    configPromise = fetchConfig();
-  }
-
-  return configPromise;
-};
+// ✅ Synchronous version (optional)
+// export const getConfig = (): LiquityFrontendConfig => {
+//   return hardcodedConfig;
+// };
