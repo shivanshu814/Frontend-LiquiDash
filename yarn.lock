@@ -1824,7 +1824,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.3.4
     ethers: 5.7.2
-    happy-dom: ^13.6.2
+    happy-dom: ^17.4.7
     lambert-w-function: 3.0.0
     npm-run-all: 4.1.5
     react: ^18.2.0
@@ -10447,13 +10447,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "entities@npm:4.5.0"
-  checksum: 853f8ebd5b425d350bffa97dd6958143179a5938352ccae092c62d1267c4e392a039be1bae7d51b6e4ffad25f51f9617531fedf5237f15df302ccfb452cbf2d7
-  languageName: node
-  linkType: hard
-
 "entities@npm:~2.1.0":
   version: 2.1.0
   resolution: "entities@npm:2.1.0"
@@ -13169,14 +13162,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^13.6.2":
-  version: 13.6.2
-  resolution: "happy-dom@npm:13.6.2"
+"happy-dom@npm:^17.4.7":
+  version: 17.4.7
+  resolution: "happy-dom@npm:17.4.7"
   dependencies:
-    entities: ^4.5.0
     webidl-conversions: ^7.0.0
     whatwg-mimetype: ^3.0.0
-  checksum: e2bae0731bea55515efc4408fac063bb71b3a1a01d4528f80fd99e7873f55617d9e87146b8693cb5da16c3511aae78c7b78f8417a192107a907a916efe3d3e06
+  checksum: 3dd70e2c930bb47a789b97ca842d1e4bc90587b4aee93aaaebf32842a4ed92e4bdf7e2fc6ba43c8991cd15b654e064fa9cbf9dc9683f5984efb1b94fac081759
   languageName: node
   linkType: hard
 
